@@ -69,6 +69,8 @@ exports.loginUser = async ({ body: { email, password } }, res, next) => {
 
 exports.getUserProfile = async (req, res, next) => {
    try {
+      console.log("req", req);
+      
       let id = req.params.id || req.body._id
       let user = await Users.findById(id).select("-__v -password")
       return res.status(OK).json(user)

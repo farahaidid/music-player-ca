@@ -6,13 +6,13 @@
     <div class="row">
       <div class="col-md-6 pr-md-1 text-left">
         <base-input label="First Name"
-                  v-model="model.firstName"
+                  v-model="firstName"
                   placeholder="First Name">
         </base-input>
       </div>
       <div class="col-md-6 pl-md-1 text-left">
         <base-input label="Last Name"
-                  v-model="model.lastName"
+                  v-model="lastName"
                   placeholder="Last Name">
         </base-input>
       </div>
@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-md-4 pr-md-1 text-left">
         <base-input label="Phone"
-                  v-model="model.city"
+                  v-model="phone"
                   placeholder="Phone Number">
         </base-input>
       </div>
@@ -57,18 +57,17 @@
   </card>
 </template>
 <script>
-import {
-  Card,
-  BaseInput
-} from "@/components/index";
 
-import BaseButton from '@/components/BaseButton';
-import GLOBAL_MIXINS from "../../mixins/global.minins";
 import moment from "moment";
+import GLOBAL_MIXINS from "../../mixins/global.mixins";
+
+import {Card, BaseInput} from "@/components/index";
+import BaseButton from '@/components/BaseButton';
 import Datepicker from "vuejs-datepicker";
 import BaseRadio from "@/components/BaseRadio.vue";
 
 export default{
+  name: "Profile",
   components:{
     Card,
     BaseInput,
@@ -86,10 +85,28 @@ export default{
   },
   data() {
     return {
-    dateOfBirth: ""
+      error: null,
+      success: null,
+      update: false,
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phone: "",
+      gender: "male",
+      dateOfBirth: "",
     }
   },
   mixins: [GLOBAL_MIXINS],
+  computed: {
+		fullName() {
+			let { firstName, lastName } = this.LOGGED_USER
+			return `${firstName} ${lastName}`
+		},
+		dob() {
+			return moment(this.LOGGED_USER.dateOfBirth).format("LL")
+		}
+	},
 	watch: {
 		LOGGED_USER(user) { this.setUpdateData() },
 		update(val) {
@@ -98,9 +115,23 @@ export default{
   },
   methods: {
 		setUpdateData() {
-			let dob = new Date(this.LOGGED_USER.dateOfBirth).toISOString().substr(0, 10)
+      let dob = new Date(this.LOGGED_USER.dateOfBirth).toISOString().substr(0, 10);
+      console.log("dob", dob);
+      
 			this.updateData = { ...this.LOGGED_USER, dateOfBirth: dob }
     },
+    customFormatter(date) {
+      return moment(date).format("DD/MM/YYYY");
+    },
+    doSomethingInParentComponentFunction(date) {
+      this.dateOfBirth = date.toISOString();
+    },
+  },
+  created() {
+    if (this.LOGGED_IN) { this.FETCH_USER_PROFILE() }
+    else { this.$router.replace("/login") }
+    
+    
   }
 
 }

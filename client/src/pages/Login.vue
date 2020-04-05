@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import GLOBAL_MIXINS from "../mixins/global.minins";
+import GLOBAL_MIXINS from "../mixins/global.mixins";
 import { mapActions } from "vuex";
 
 import { Card, BaseInput } from "@/components/index";
@@ -76,9 +76,7 @@ export default {
           email: this.email,
           password: this.password,
         });
-        console.log("user", user);
-        console.log("error", error);
-        
+
         if (error) this.error = error;
         else {
           this.reset();
@@ -92,7 +90,7 @@ export default {
     },
   },
   created() {
-    this.LOGGED_IN && this.$router.replace(`/user/profile`);
+    this.LOGGED_IN && this.$router.replace(`/user`);
   },
 };
 </script>
