@@ -125,23 +125,21 @@ export default {
     afterComplete(file) {
         // console.log("file", file);
         
-        if (file.dataURL) {
-            var date = new Date();
+        // if (file.dataURL) {
+        //     var date = new Date();
 
-            let data = {
-                name: file.name,
-                type: file.type,
-                size: file.size,
-                dataURL: file.dataURL,
-                uploadedAt: date.toISOString()
-            }
+        //     let data = {
+        //         name: file.name,
+        //         type: file.type,
+        //         size: file.size,
+        //         dataURL: file.dataURL,
+        //         uploadedAt: date.toISOString()
+        //     }
 
-            // this.uploadFile(data); 
-        }
+        //     // this.uploadFile(data); 
+        // }
     },
     async vfileAdded(file) {
-        console.log("file  222", file);
-        
         let { error, message } = await this.SAVE_FILES(file);
     },
     removeAllFiles() {

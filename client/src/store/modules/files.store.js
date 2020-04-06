@@ -29,10 +29,7 @@ const actions = {
          let data = {file: files}
          let file = (await API_FORM_DATA.post(`file/upload?token=${token}`, formData)).data
          console.log("file", file);
-         
-         // let trips = [{ ...file }, ...state.file]
-         // commit("SET_STATE", { trips })
-         // resolve({ message: "Trip saved successfully!" })
+         resolve({ message: "File saved successfully!" })
       }
       catch (error) { resolve({ error: error.message }) }
    }),

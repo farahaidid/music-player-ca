@@ -19,6 +19,10 @@ const schema = new mongoose.Schema({
       type: String,
       required: true
    },
+   fileType: {
+      type: String,
+      required: true
+   },
    uploadedAt: {
       type: Date,
       default: Date.now()

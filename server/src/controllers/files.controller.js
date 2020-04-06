@@ -12,8 +12,6 @@ exports.getFile = async (req, res, next) => {
 }
 
 exports.uploadFile = async (req, res, next) => {
-
-   console.log("req", req.files);
    let file = req.files.file 
    if(!file) return res.status(400).send("File required")
    let splitDot = file.name.split(".")
@@ -22,10 +20,30 @@ exports.uploadFile = async (req, res, next) => {
    let fileName = `${name}.${fileExt}`
    //save file in upload folder
    await saveBuffer(req.files.file.data, `uploads/${fileName}`);
+
+   let fileURL= `http://localhost:3500/api/file/${fileName}`
+
+   let fileData = {
+      userId: "5e88a4244416a92d1c95a037",
+      fileName: file.name,
+      fileUrl: fileURL,
+      uploadFileName: fileName,
+      fileType: file.mimetype,
+      size: file.size
+   }
+
+   let newFile = new Files(fileData)
+   let hasError = newFile.validateSync()
+   if (hasError) throw new ErrorHandler(BAD_REQUEST, hasError.message)
+
+   try {
+      await newFile.save();
+   } catch (error) { throw new ErrorHandler(INTERNAL_SERVER_ERROR, error.message) }
+   
    return res.status(200).json({
       message: 'File Upload Successfully',
       fileName: fileName,
-      fileUrl: `http://localhost:3500/api/file/${fileName}`
+      fileUrl: fileURL
    })
    // try {
    //    let { city, dateFrom, dateTo, price, _id } = req.body
