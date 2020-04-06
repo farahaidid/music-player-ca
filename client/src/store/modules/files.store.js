@@ -1,5 +1,5 @@
 
-import { API } from "../../axios/config.axios"
+import { API, API_FORM_DATA } from "../../axios/config.axios"
 
 const initialState = {
    trips: []
@@ -24,8 +24,10 @@ const actions = {
       
       try {
          let { _id, token } = rootState.AUTH.loggedUser
-         let data = files
-         let file = (await API.post(`user/${_id}/files?token=${token}`, data)).data
+         let formData = new FormData()
+         formData.append('file',files)
+         let data = {file: files}
+         let file = (await API_FORM_DATA.post(`file/upload?token=${token}`, formData)).data
          console.log("file", file);
          
          // let trips = [{ ...file }, ...state.file]

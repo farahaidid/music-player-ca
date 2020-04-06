@@ -12,12 +12,5 @@ userRouter.route("/:id")
    .get(verifyToken, getUserProfile)
    .patch(verifyToken, updateProfile)
 
-userRouter.route("/:id/files", upload.single('audioFiles'))
-   .post(uploadFile)
-   .get(verifyToken, getFiles)
-
-userRouter.route("/:id/files/:fileId")
-   .delete(verifyToken, deleteFiles)
-
 exports.userRouter = userRouter
 exports.usersRouter = usersRouter

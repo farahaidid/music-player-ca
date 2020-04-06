@@ -109,7 +109,7 @@ export default {
         data: [...tableData],
         },
         dropzoneOptions: {
-            url: 'https://httpbin.org/post',
+            url: '/',
             maxFilesize: 2,
             headers: { "My-Awesome-Header": "header value" },
             thumbnailWidth: 150, // px

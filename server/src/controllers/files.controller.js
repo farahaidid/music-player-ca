@@ -1,19 +1,32 @@
 const Files = require('../models/files.model')
 const { ErrorHandler } = require("../middlewares/error.handler")
 const { BAD_REQUEST, OK, INTERNAL_SERVER_ERROR } = require("../js/http.status")
+const saveBuffer = require("save-buffer")
+const randomNumber = require("random-number")
+const path = require("path")
 
-exports.getFiles = async (req, res, next) => {
-   // try {
-   //    let id = req.params.id || req.body._id
-   //    let trips = await Files.find({ addedBy: id })
-   //    res.status(OK).json(trips)
-   // } catch (error) { next(error) }
+exports.getFile = async (req, res, next) => {
+   try {
+      res.sendFile(path.join(__dirname, "../uploads", `${req.params.id}`));
+   } catch (error) { next(error) }
 }
 
 exports.uploadFile = async (req, res, next) => {
 
-   console.log("req", req.file);
-   
+   console.log("req", req.files);
+   let file = req.files.file 
+   if(!file) return res.status(400).send("File required")
+   let splitDot = file.name.split(".")
+   let fileExt = splitDot[splitDot.length - 1]
+   let name = `${randomNumber() * 100000}${new Date().getTime()}`
+   let fileName = `${name}.${fileExt}`
+   //save file in upload folder
+   await saveBuffer(req.files.file.data, `uploads/${fileName}`);
+   return res.status(200).json({
+      message: 'File Upload Successfully',
+      fileName: fileName,
+      fileUrl: `http://localhost:3500/api/file/${fileName}`
+   })
    // try {
    //    let { city, dateFrom, dateTo, price, _id } = req.body
    //    let trip = new Files({ city, dateFrom, dateTo, price, addedBy: _id })
@@ -28,7 +41,7 @@ exports.uploadFile = async (req, res, next) => {
    // } catch (error) { next(error) }
 }
 
-exports.deleteFiles = async (req, res, next) => {
+exports.deleteFile = async (req, res, next) => {
    // try {
    //    let _id = req.params.tripId
    //    console.log("DELETE_TRIP", _id)

@@ -11,6 +11,10 @@ const schema = new mongoose.Schema({
       type: String,
       required: true
    },
+   fileUrl: {
+      type: String,
+      required: true
+   },
    uploadFileName: {
       type: String,
       required: true
