@@ -43,7 +43,8 @@ import routes from "./router";
 
 // configure router
 const router = new VueRouter({
-  routes, // short for routes: routes
+  routes, // short for routes: routes,
+  mode: 'history',
   linkExactActiveClass: "active"
 });
 Vue.use(Vuex)

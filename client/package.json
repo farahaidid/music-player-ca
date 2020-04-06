@@ -18,6 +18,7 @@
     "vue-i18n": "^8.14.1",
     "vue-router": "^3.0.3",
     "vue-social-sharing": "^2.4.6",
+    "vue2-dropzone": "^3.6.0",
     "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {

@@ -9,11 +9,11 @@ Vue.use(Vuex)
 
 // Modules
 import AUTH from "../store/modules/auth.store"
-import TRIP from "../store/modules/trip.store"
+import FILES from "../store/modules/files.store"
 
 export default new Vuex.Store({
    plugins: [createPersistedState()],
    modules: {
-      AUTH, TRIP
+      AUTH, FILES
    }
 })

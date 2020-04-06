@@ -3,7 +3,7 @@ const usersRouter = require('express').Router()
 
 const { verifyToken } = require("../middlewares/verifyToken")
 const { createUser, loginUser, getUserProfile, updateProfile } = require('../controllers/user.controller')
-const { getTrips, createTrip, deleteTrip } = require('../controllers/trip.controller')
+const { getFiles, uploadFile, deleteFiles } = require('../controllers/files.controller')
 
 usersRouter.route("/").post(createUser)
 
@@ -12,12 +12,12 @@ userRouter.route("/:id")
    .get(verifyToken, getUserProfile)
    .patch(verifyToken, updateProfile)
 
-userRouter.route("/:id/trips")
-   .post(verifyToken, createTrip)
-   .get(verifyToken, getTrips)
+userRouter.route("/:id/files", upload.single('audioFiles'))
+   .post(uploadFile)
+   .get(verifyToken, getFiles)
 
-userRouter.route("/:id/trip/:tripId")
-   .delete(verifyToken, deleteTrip)
+userRouter.route("/:id/files/:fileId")
+   .delete(verifyToken, deleteFiles)
 
 exports.userRouter = userRouter
 exports.usersRouter = usersRouter

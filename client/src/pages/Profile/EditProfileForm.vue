@@ -116,8 +116,6 @@ export default{
   methods: {
 		setUpdateData() {
       let dob = new Date(this.LOGGED_USER.dateOfBirth).toISOString().substr(0, 10);
-      console.log("dob", dob);
-      
 			this.updateData = { ...this.LOGGED_USER, dateOfBirth: dob }
     },
     customFormatter(date) {
@@ -131,7 +129,7 @@ export default{
     if (this.LOGGED_IN) { this.FETCH_USER_PROFILE() }
     else { this.$router.replace("/login") }
     
-    
+
   }
 
 }

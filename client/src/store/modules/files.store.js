@@ -19,18 +19,18 @@ const mutations = {
 }
 
 const actions = {
-   SAVE_TRIP: ({ commit, state, rootState }, { city, dateFrom, dateTo, price }) => new Promise(async resolve => {
+   SAVE_FILES: ({ commit, state, rootState }, files) => new Promise(async resolve => {
+      console.log("files hello", files);
+      
       try {
          let { _id, token } = rootState.AUTH.loggedUser
-         let data = {
-            city, dateFrom: new Date(dateFrom).toISOString(),
-            dateTo: new Date(dateTo).toISOString(),
-            price
-         }
-         let trip = (await API.post(`user/${_id}/trips?token=${token}`, data)).data
-         let trips = [{ ...trip }, ...state.trips]
-         commit("SET_STATE", { trips })
-         resolve({ message: "Trip saved successfully!" })
+         let data = files
+         let file = (await API.post(`user/${_id}/files?token=${token}`, data)).data
+         console.log("file", file);
+         
+         // let trips = [{ ...file }, ...state.file]
+         // commit("SET_STATE", { trips })
+         // resolve({ message: "Trip saved successfully!" })
       }
       catch (error) { resolve({ error: error.message }) }
    }),

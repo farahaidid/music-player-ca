@@ -3,29 +3,25 @@ const mongoose = require('mongoose')
 const { ObjectId } = require('mongoose').SchemaTypes
 
 const schema = new mongoose.Schema({
-   city: {
+   userId: {
       type: String,
       required: true
    },
-   dateFrom: {
-      type: Date,
+   fileName: {
+      type: String,
       required: true
    },
-   dateTo: {
-      type: Date,
+   uploadFileName: {
+      type: String,
       required: true
    },
-   price: {
-      type: Number,
-      required: true
-   },
-   addedBy: {
-      type: ObjectId,
-      required: true
-   },
-   createdAt: {
+   uploadedAt: {
       type: Date,
       default: Date.now()
+   },
+   size: {
+      type: Number,
+      required: true
    }
 })
 

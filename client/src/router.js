@@ -23,35 +23,40 @@ const routes = [{
       component: Dashboard
     },
     {
+      path: "my-music",
+      name: "My Music",
+      component: views("MyMusic")
+    },
+    {
       path: "icons",
       name: "Icons",
       component: Icons
     },
-    // {
-    //   path: "maps",
-    //   name: "Maps",
-    //   component: Maps
-    // },
-    // {
-    //   path: "notifications",
-    //   name: "Notifications",
-    //   component: Notifications
-    // },
+    {
+      path: "maps",
+      name: "Maps",
+      component: Maps
+    },
+    {
+      path: "notifications",
+      name: "Notifications",
+      component: Notifications
+    },
     {
       path: "user",
       name: "User Profile",
       component: UserProfile
     },
-    // {
-    //   path: "table",
-    //   name: "Table List",
-    //   component: TableList
-    // },
-    // {
-    //   path: "typography",
-    //   name: "Typography",
-    //   component: Typography
-    // }
+    {
+      path: "table",
+      name: "Table List",
+      component: TableList
+    },
+    {
+      path: "typography",
+      name: "Typography",
+      component: Typography
+    }
   ]
 },
 {
