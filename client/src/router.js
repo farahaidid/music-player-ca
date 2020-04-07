@@ -11,7 +11,6 @@ import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 
 const views = name => () => import(`@/pages/${name}.vue`);
 
-
 const routes = [{
   path: "/",
   component: DashboardLayout,

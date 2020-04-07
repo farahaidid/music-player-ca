@@ -48,6 +48,11 @@ export default {
   methods:{
     
   },
+  created() {
+    if (!this.LOGGED_IN) {
+      this.$router.replace(`/login`)
+    }
+  },
   mounted(){
     this.FETCH_FILES();
   }

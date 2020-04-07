@@ -31,7 +31,7 @@
           <p>الرموز</p>
         </template>
       </sidebar-link> -->
-      <sidebar-link to="/maps">
+      <!-- <sidebar-link to="/maps">
         <i class="tim-icons icon-pin"></i>
         <template v-if="!isRTL">
           <p>Maps</p>
@@ -84,7 +84,7 @@
         <template v-else>
           <p>دعم RTL</p>
         </template>
-      </sidebar-link>
+      </sidebar-link> -->
     </side-bar>
     <sidebar-share :background-color.sync="backgroundColor"></sidebar-share>
 
