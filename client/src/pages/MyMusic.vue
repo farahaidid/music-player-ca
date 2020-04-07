@@ -4,16 +4,38 @@
       <div class="col-12">
         <card>
           <template slot="header">
-            <h4 class="card-title">Simple Table</h4>
+            <h4 class="card-title">Files</h4>
           </template>
-          <div class="table-responsive text-left">
+          <!-- <div class="table-responsive text-left">
             <base-table
               :data="table1.data"
               :columns="table1.columns"
               thead-classes="text-primary"
             >
             </base-table>
-          </div>
+          </div> -->
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>File Name</th>
+                <th>Uploaded At</th>
+                <th>Size</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(file, index) in FILES" :key="file._id">
+                <td>{{index + 1}}</td>
+                <td>{{file.fileName}}</td>
+                <td>{{getDateFormate(file.uploadedAt)}}</td>
+                <td>{{sizeofFile(file.size)}}</td>
+                <td>
+                  <i class="tim-icons icon-trash-simple" style="cursor: pointer;" @click="deleteFile(file._id)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </card>
       </div>
     </div>
@@ -117,6 +139,21 @@ export default {
             addRemoveLinks: true,
             chunking: true,
         },
+        getDateFormate(date) {
+          if (date) {
+            return moment(date).format('MM/DD/YYYY h:mm:SS A');
+          }
+        },
+        sizeofFile(bytes, decimals = 2) {
+          if (bytes === 0) return '0 Bytes';
+
+          const k = 1024;
+          const dm = decimals < 0 ? 0 : decimals;
+          const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+          const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+          return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
     };
   },
   mixins: [GLOBAL_MIXINS],
@@ -124,29 +161,31 @@ export default {
   methods: {
     afterComplete(file) {
         // console.log("file", file);
-        
-        // if (file.dataURL) {
-        //     var date = new Date();
-
-        //     let data = {
-        //         name: file.name,
-        //         type: file.type,
-        //         size: file.size,
-        //         dataURL: file.dataURL,
-        //         uploadedAt: date.toISOString()
-        //     }
-
-        //     // this.uploadFile(data); 
-        // }
     },
     async vfileAdded(file) {
-        let { error, message } = await this.SAVE_FILES(file);
+      await this.SAVE_FILES(file).then(response => {
+        this.FETCH_FILES();
+      })
     },
     removeAllFiles() {
       this.$refs.dropzone.removeAllFiles();
+    },
+    deleteFile(fileId) {
+      if (fileId) {
+        var isOkPress = confirm("Are you sure you want to delete this file? You will not get back");
+
+        if (isOkPress === true) {
+          this.DELETE_FILE(fileId).then(res => {
+              console.log(res);            
+              this.FETCH_FILES();
+          })
+        }
+      }
     }
   },
-  mounted() {},
+  mounted() {
+    this.FETCH_FILES();
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -1,12 +1,18 @@
 const fileRouter = require('express').Router()
 
 const { verifyToken } = require("../middlewares/verifyToken")
-const {getFile, uploadFile, deleteFile} = require('../controllers/files.controller')
+const {getFile, getFiles, uploadFile, deleteFile} = require('../controllers/files.controller')
 
 fileRouter.route("/upload").post(uploadFile)
 
+fileRouter.route("/:id/files")
+   .get(getFiles)
+
 fileRouter.route("/:id")
    .get(verifyToken, getFile)
-   .delete(verifyToken, deleteFile)
+   // .delete(verifyToken, deleteFile)
+
+fileRouter.route("/:id/files/:fileId")
+   .delete(deleteFile)
 
 exports.fileRouter = fileRouter

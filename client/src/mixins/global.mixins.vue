@@ -10,7 +10,7 @@ export default {
 	methods: {
 		...mapMutations("AUTH", ["SET_AUTH_STATE"]),
 		...mapActions("AUTH", ["LOGIN", "FETCH_USER_PROFILE", "UPDATE_USER_PROFILE", "RESET_PASSWORD"]),
-		...mapActions("FILES", ["SAVE_FILES", "FETCH_TRIPS", "DELETE_TRIP"]),
+		...mapActions("FILES", ["SAVE_FILES", "FETCH_FILES", "DELETE_FILE"]),
 	},
 }
 </script>

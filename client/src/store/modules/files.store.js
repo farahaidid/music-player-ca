@@ -7,15 +7,15 @@ const initialState = {
 
 const state = { ...initialState }
 
-const getters = { TRIPS: state => state.trips }
+const getters = { FILES: state => state.files }
 
 const mutations = {
    SET_STATE: (state, payload) => {
       Object.keys(payload).forEach(key => state[key] = payload[key])
    },
-   SET_TRIP_STATE: (state, payload) => {
-      Object.keys(payload).forEach(key => state[key] = payload[key])
-   }
+   // SET_TRIP_STATE: (state, payload) => {
+   //    Object.keys(payload).forEach(key => state[key] = payload[key])
+   // }
 }
 
 const actions = {
@@ -24,6 +24,7 @@ const actions = {
       
       try {
          let { _id, token } = rootState.AUTH.loggedUser
+         files.userId = _id;
          let formData = new FormData()
          formData.append('file',files)
          let data = {file: files}
@@ -33,20 +34,20 @@ const actions = {
       }
       catch (error) { resolve({ error: error.message }) }
    }),
-   FETCH_TRIPS: ({ commit, rootState }) => new Promise(async resolve => {
+   FETCH_FILES: ({ commit, rootState }) => new Promise(async resolve => {
       try {
          let { _id, token } = rootState.AUTH.loggedUser
-         let trips = (await API.get(`user/${_id}/trips?token=${token}`)).data
-         console.log("TRIPS", trips)
-         commit("SET_STATE", { trips })
+         let files = (await API.get(`file/${_id}/files?token=${token}`)).data
+         console.log("files", files)
+         commit("SET_STATE", { files })
       }
       catch (error) { resolve({ error: error.message }) }
    }),
-   DELETE_TRIP: ({ dispatch, state, rootState }, tripId) => new Promise(async resolve => {
+   DELETE_FILE: ({ dispatch, state, rootState }, fileId) => new Promise(async resolve => {
       try {
          let { _id, token } = rootState.AUTH.loggedUser
-         await API.delete(`user/${_id}/trip/${tripId}?token=${token}`)
-         dispatch("FETCH_TRIPS")
+         await API.delete(`file/${_id}/files/${fileId}`)
+         dispatch("FETCH_FILES")
       }
       catch (error) { resolve({ error: error.message }) }
    })
