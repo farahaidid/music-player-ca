@@ -55,10 +55,10 @@ exports.loginUser = async ({ body: { email, password } }, res, next) => {
       // password not matched
       if (!matched) throw new Error(BAD_REQUEST, "Incorrect password!")
 
-      console.log("token", process.env.TOKEN_SECRET);
+      console.log("token",  "my-awesome-token-secret");
       
       // Json web token
-      let token = jwt.sign({ _id: user._id }, "my-awesome-token-secret", { expiresIn: '168h' })
+      let token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET , { expiresIn: '168h' })
 
       // Sending response
       res.status(OK).json({ _id: user._id, token })
