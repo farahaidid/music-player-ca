@@ -26,7 +26,7 @@ import '@/assets/scss/white-dashboard.scss';
 import '@/assets/css/nucleo-icons.css';
 import "@/assets/demo/demo.css";
 import store from "./store";
-
+import VuePlyr from 'vue-plyr'
 
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
@@ -34,6 +34,8 @@ import RTLPlugin from "./RTLPlugin";
 import Notify from "@/components/NotificationPlugin";
 import i18n from "./i18n"
 import SideBar from "@/components/SidebarPlugin";
+
+// import 'vue-plyr/dist/vue-plyr.css';
 
 
 Vue.config.productionTip = false;
@@ -56,6 +58,13 @@ Vue.use(GlobalDirectives);
 Vue.use(RTLPlugin);
 Vue.use(SideBar);
 Vue.use(Notify);
+
+Vue.use(VuePlyr, {
+  plyr: {
+    fullscreen: { enabled: false }
+  },
+  emit: ['ended']
+})
 
 new Vue({
   router,

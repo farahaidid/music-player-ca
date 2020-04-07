@@ -9,7 +9,7 @@ fileRouter.route("/:id/files")
    .get(getFiles)
 
 fileRouter.route("/:id")
-   .get(verifyToken, getFile)
+   .get(getFile)
    // .delete(verifyToken, deleteFile)
 
 fileRouter.route("/:id/files/:fileId")

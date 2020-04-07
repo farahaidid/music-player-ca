@@ -22,8 +22,6 @@ exports.getFiles = async (req, res, next) => {
 exports.uploadFile = async (req, res, next) => {
    let file = req.files.file;
 
-   console.log("file", req.files);
-   
    if(!file) return res.status(400).send("File required")
    let splitDot = file.name.split(".")
    let fileExt = splitDot[splitDot.length - 1]
