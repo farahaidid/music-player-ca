@@ -9,7 +9,7 @@ usersRouter.route("/").post(createUser)
 
 userRouter.route("/login").post(loginUser)
 userRouter.route("/:id")
-   .get(verifyToken, getUserProfile)
+   .get( getUserProfile)
    .patch(verifyToken, updateProfile)
 
 exports.userRouter = userRouter

@@ -36,7 +36,9 @@ const actions = {
       let { _id, token } = state.loggedUser
       try {
          let user = (await API.get(`user/${_id}?token=${token}`)).data
+
          commit("SET_STATE", { loggedUser: { ...user, token } })
+         return user;
       }
       catch (error) {
          console.log(error.response)

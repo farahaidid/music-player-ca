@@ -165,19 +165,21 @@ export default{
 		}
   },
   created() {
-    // if (this.LOGGED_IN) { this.FETCH_USER_PROFILE() }
-    // else { this.$router.replace("/login") }
+    if (this.LOGGED_IN) { this.FETCH_USER_PROFILE() }
+    else { this.$router.replace("/login") }
   },
   mounted() {
-    if (this.LOGGED_USER) {
-      this.firstName = this.LOGGED_USER.firstName;
-      this.lastName = this.LOGGED_USER.lastName;
-      this.email = this.LOGGED_USER.email;
-      // password: "",
-      this.phone = this.LOGGED_USER.phone;
-      this.gender = this.LOGGED_USER.gender;
-      this.dateOfBirth= this.LOGGED_USER.dateOfBirth;
-    }
+    this.FETCH_USER_PROFILE().then(result => {
+      if (result) {
+        this.firstName = result.firstName;
+        this.lastName = result.lastName;
+        this.email = result.email;
+        // password: "",
+        this.phone = result.phone;
+        this.gender = result.gender;
+        this.dateOfBirth= result.dateOfBirth;
+      }
+    });
   }
 }
 </script>

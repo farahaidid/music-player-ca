@@ -132,12 +132,13 @@ export default {
         },
         dropzoneOptions: {
             url: '/',
-            maxFilesize: 2,
+            // maxFilesize: 2,
             headers: { "My-Awesome-Header": "header value" },
             thumbnailWidth: 150, // px
             thumbnailHeight: 150,
             addRemoveLinks: true,
             chunking: true,
+            acceptedFiles: "audio/*"
         },
         getDateFormate(date) {
           if (date) {
@@ -163,9 +164,14 @@ export default {
         // console.log("file", file);
     },
     async vfileAdded(file) {
-      await this.SAVE_FILES(file).then(response => {
-        this.FETCH_FILES();
-      })
+      let type = file.type;
+      let isAudio = type.slice(0, 5);
+
+      if (isAudio === 'audio') {
+        await this.SAVE_FILES(file).then(response => {
+          this.FETCH_FILES();
+        })
+      }
     },
     removeAllFiles() {
       this.$refs.dropzone.removeAllFiles();

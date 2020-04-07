@@ -6,8 +6,9 @@
         <!-- <p class="category">Handcrafted by our friends from <a href="https://nucleoapp.com/?ref=1712">NucleoApp</a></p> -->
       </template>
       <div class="row">
+        <!-- v-if="file.fileType === 'audio/mp3' || file.fileType === 'audio/x-m4a'" -->
         <template v-for="file in FILES">
-          <div v-if="file.fileType === 'audio/mp3' || file.fileType === 'audio/x-m4a'" class="font-icon-list col-lg-4 col-md-6 col-sm-6 col-xs-6 col-xs-6 mb-4" 
+          <div class="font-icon-list col-lg-4 col-md-6 col-sm-6 col-xs-6 col-xs-6 mb-4" 
           :key="file._id">
             <div class="audio-payer-detail">
               <marquee behavior="scroll" direction="left">{{file.fileName}}</marquee>

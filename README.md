@@ -4,7 +4,8 @@
 
 `cd server`
 `npm install`
-`npm run dev`
+`cd src`
+`nodemon server.js`
 
 > CLIENT
 
