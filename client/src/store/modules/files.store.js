@@ -20,8 +20,6 @@ const mutations = {
 
 const actions = {
    SAVE_FILES: ({ commit, state, rootState }, files) => new Promise(async resolve => {
-      console.log("files hello", files);
-      
       try {
          let { _id, token } = rootState.AUTH.loggedUser
          files.userId = _id;

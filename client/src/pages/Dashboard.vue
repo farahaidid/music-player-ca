@@ -7,7 +7,7 @@
       </template>
       <div class="row">
         <template v-for="file in FILES">
-          <div v-if="file.fileType === 'audio/mp3'" class="font-icon-list col-lg-4 col-md-6 col-sm-6 col-xs-6 col-xs-6 mb-4" 
+          <div v-if="file.fileType === 'audio/mp3' || file.fileType === 'audio/x-m4a'" class="font-icon-list col-lg-4 col-md-6 col-sm-6 col-xs-6 col-xs-6 mb-4" 
           :key="file._id">
             <div class="audio-payer-detail">
               <marquee behavior="scroll" direction="left">{{file.fileName}}</marquee>
@@ -26,7 +26,6 @@
   </div>
 </template>
 <script>
-
 import {
   Card
 } from "@/components/index";
