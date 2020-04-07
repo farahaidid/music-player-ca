@@ -2,7 +2,7 @@
   <div class="content">
     <card>
       <template slot="header">
-        <!-- <h5 class="title">Your audio list</h5> -->
+        <h5 class="title">Audio list</h5>
         <!-- <p class="category">Handcrafted by our friends from <a href="https://nucleoapp.com/?ref=1712">NucleoApp</a></p> -->
       </template>
       <div class="row">
