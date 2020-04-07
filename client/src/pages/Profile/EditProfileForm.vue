@@ -3,6 +3,9 @@
     <template slot="header">
       <h5 class="title">Edit Profile</h5>
     </template>
+     <base-alert v-if="error" type="warning" dismissible>
+      {{error}}
+    </base-alert>
     <div class="row">
       <div class="col-md-6 pr-md-1 text-left">
         <base-input label="First Name"
@@ -52,7 +55,7 @@
       </div>
     </div>
     <template slot="footer">
-      <base-button type="success" fill>Save</base-button>
+      <base-button type="success" fill @click="updateUser">Save</base-button>
     </template>
   </card>
 </template>
@@ -65,6 +68,7 @@ import {Card, BaseInput} from "@/components/index";
 import BaseButton from '@/components/BaseButton';
 import Datepicker from "vuejs-datepicker";
 import BaseRadio from "@/components/BaseRadio.vue";
+import BaseAlert from "@/components/BaseAlert.vue";
 
 export default{
   name: "Profile",
@@ -74,6 +78,7 @@ export default{
     BaseButton,
     Datepicker,
     BaseRadio,
+    BaseAlert,
   },
   props: {
     model: {
@@ -105,7 +110,14 @@ export default{
 		},
 		dob() {
 			return moment(this.LOGGED_USER.dateOfBirth).format("LL")
-		}
+    },
+    strFields: () => [
+      "firstName",
+      "lastName",
+      "email",
+      "phone",
+      "dateOfBirth",
+    ],
 	},
 	watch: {
 		LOGGED_USER(user) { this.setUpdateData() },
@@ -124,14 +136,49 @@ export default{
     doSomethingInParentComponentFunction(date) {
       this.dateOfBirth = date.toISOString();
     },
+    updateUser() {
+      let updateData = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        gender: this.gender,
+        dateOfBirth: this.dateOfBirth, 
+        phone: this.phone
+      }
+
+      let valid = this.validate(updateData)
+			if (!valid) {
+				this.error = "Please fill the informations correctly"
+				this.success = null
+			} else {
+        this.error = null;
+        this.UPDATE_USER_PROFILE(updateData).then(({ error, message }) => {
+					if (error) { this.error = error }
+					else { this.success = "Profile updated successfully"; this.update = false }
+				})
+      }
+      
+    },
+    validate(updateData) {
+      // return updateData.foreach(f => f.trim() !== "")
+      return this.strFields.every((f) => this[f].trim() !== "");
+		}
   },
   created() {
-    if (this.LOGGED_IN) { this.FETCH_USER_PROFILE() }
-    else { this.$router.replace("/login") }
-    
-
+    // if (this.LOGGED_IN) { this.FETCH_USER_PROFILE() }
+    // else { this.$router.replace("/login") }
+  },
+  mounted() {
+    if (this.LOGGED_USER) {
+      this.firstName = this.LOGGED_USER.firstName;
+      this.lastName = this.LOGGED_USER.lastName;
+      this.email = this.LOGGED_USER.email;
+      // password: "",
+      this.phone = this.LOGGED_USER.phone;
+      this.gender = this.LOGGED_USER.gender;
+      this.dateOfBirth= this.LOGGED_USER.dateOfBirth;
+    }
   }
-
 }
 </script>
 <style lang="scss">
