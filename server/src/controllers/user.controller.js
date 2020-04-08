@@ -55,7 +55,7 @@ exports.loginUser = async ({ body: { email, password } }, res, next) => {
       // password not matched
       if (!matched) throw new Error(BAD_REQUEST, "Incorrect password!")
 
-      console.log("token",  "my-awesome-token-secret");
+      console.log("token",  "my-awesome-token-secret", process.env.TOKEN_SECRET);
       
       // Json web token
       let token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET , { expiresIn: '168h' })
@@ -90,8 +90,10 @@ exports.updateProfile = async (req, res, next) => {
 
 exports.resetPassword = async (req, res, next) => {
    try {
-
       let { email, password } = req.body
+
+      console.log("email, password", email, password);
+      
 
       // Hashing password
       const salt = bcrypt.genSaltSync(10);

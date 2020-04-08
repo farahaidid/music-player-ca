@@ -67,7 +67,12 @@ const routes = [{
   path: '/login',
   name: "Login",
   component: views("Login")
-}
+},
+{
+  path: '/forgot-password',
+  name: 'ForgotPassword',
+  component: views("ForgotPassword")
+},
 ];
 
 export default routes;
