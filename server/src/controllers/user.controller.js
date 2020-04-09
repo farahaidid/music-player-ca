@@ -4,6 +4,7 @@ const { BAD_REQUEST, OK, NOT_FOUND, INTERNAL_SERVER_ERROR } = require("../js/htt
 const DUPLICATE = "E11000"
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const config = require("../config/config")
 
 exports.createUser = async (req, res, next) => {
    try {
@@ -54,11 +55,9 @@ exports.loginUser = async ({ body: { email, password } }, res, next) => {
 
       // password not matched
       if (!matched) throw new Error(BAD_REQUEST, "Incorrect password!")
-
-      console.log("token",  "my-awesome-token-secret", process.env.TOKEN_SECRET);
       
       // Json web token
-      let token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET , { expiresIn: '168h' })
+      let token = jwt.sign({ _id: user._id }, config.TOKEN_SECRET , { expiresIn: '168h' })
 
       // Sending response
       res.status(OK).json({ _id: user._id, token })
