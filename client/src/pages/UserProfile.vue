@@ -1,13 +1,13 @@
 <template>
   <div class="content">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <edit-profile-form :model="model">
         </edit-profile-form>
       </div>
-      <div class="col-md-4">
-        <user-card :user="user"></user-card>
-      </div>
+      <!-- <div class="col-md-4"> -->
+        <!-- <user-card :user="user"></user-card> -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
