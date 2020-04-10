@@ -33,7 +33,7 @@ exports.uploadFile = async (req, res, next) => {
    let fileURL= `http://localhost:3500/api/file/${fileName}`
 
    let fileData = {
-      userId: "5e88a3c64416a92d1c95a036",
+      userId: "5e8c06caded2c410e8da92de",
       fileName: file.name,
       fileUrl: fileURL,
       uploadFileName: fileName,

@@ -43,8 +43,7 @@
     <div class="file-upload">
         <card>
             <vue-dropzone ref="myVueDropzone" id="dropzone" class="customdropzone" 
-             @vdropzone-file-added="vfileAdded" accept="image/*"
-            @vdropzone-complete="afterComplete" :options="dropzoneOptions" :useCustomSlot=true>
+             @vdropzone-file-added="vfileAdded" @vdropzone-complete="afterComplete" :options="dropzoneOptions" :useCustomSlot=true>
                 <div class="dropzone-custom-content">
                     <i class="fa fa-cloud-upload"></i>
                     <span class="dropzone-custom-title"> Choose files or drag & drop here</span>
@@ -199,7 +198,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .customdropzone {
 //   background-color:black;
   font-family: 'Arial', sans-serif;
@@ -214,10 +213,10 @@ export default {
     display: inline-block;
 
     .dz-image {
-      width: 80px;
-      height: 80px;
-      margin-left: 40px;
-      margin-bottom: 10px;
+      // width: 80px;
+      // height: 80px;
+      // margin-left: 40px;
+      // margin-bottom: 10px;
 
       div {
         width: inherit;
@@ -238,8 +237,12 @@ export default {
     }
   }
 
-  .dz-success-mark, .dz-error-mark, .dz-remove {
-    display: none;
-  }
+  // .dz-success-mark, .dz-error-mark, .dz-remove {
+  //   display: none;
+  // }
 }
+.dropzone .dz-preview.dz-error .dz-error-message {
+    display:  none !important;
+}
+
 </style>
