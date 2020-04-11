@@ -43,7 +43,7 @@ const actions = {
    DELETE_FILE: ({ dispatch, state, rootState }, fileId) => new Promise(async resolve => {
       try {
          let { _id, token } = rootState.AUTH.loggedUser
-         await API.delete(`file/${_id}/files/${fileId}`)
+         await API.delete(`file/${_id}/files/${fileId}?token=${token}`)
          dispatch("FETCH_FILES")
       }
       catch (error) { resolve({ error: error.message }) }

@@ -22,7 +22,7 @@
 
             <audio
               ref="audioRef"
-              :src="selectedFiles.fileUrl"
+              :src="getFileURL()"
               id="audio-container"
               width="100%"
               controls
@@ -82,6 +82,7 @@ export default {
   data() {
     return {
       selectedFiles: null,
+      userInfo: {},
       getDateFormate(date) {
         if (date) {
           return moment(date).format("MM/DD/YYYY h:mm:SS A");
@@ -99,6 +100,9 @@ export default {
           parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
         );
       },
+      getFileURL() {
+        return this.selectedFiles.fileUrl+'?token='+this.userInfo.token;
+      }
     };
   },
   computed: {},
@@ -125,6 +129,7 @@ export default {
     if (!this.LOGGED_IN) {
       this.$router.replace(`/login`);
     }
+    this.userInfo = this.LOGGED_USER;
   },
   mounted() {
     this.FETCH_FILES();
