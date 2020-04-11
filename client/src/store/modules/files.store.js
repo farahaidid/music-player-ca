@@ -36,7 +36,6 @@ const actions = {
       try {
          let { _id, token } = rootState.AUTH.loggedUser
          let files = (await API.get(`file/${_id}/files?token=${token}`)).data
-         console.log("files", files)
          commit("SET_STATE", { files })
       }
       catch (error) { resolve({ error: error.message }) }

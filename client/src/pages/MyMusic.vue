@@ -245,4 +245,11 @@ export default {
     display:  none !important;
 }
 
+.dz-success-mark {
+  display: none !important;
+}
+
+.dz-error-mark {
+  display: none !important;
+}
 </style>

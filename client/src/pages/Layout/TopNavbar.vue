@@ -68,7 +68,7 @@
                   <li class="nav-link"><router-link to="/user" class="nav-item dropdown-item">Profile</router-link></li>
                   <!-- <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li> -->
                   <li class="dropdown-divider"></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item" @click="Logout()">Log out</a></li>
                 </ul>
               </drop-down>
         </ul>
@@ -77,6 +77,7 @@
   </nav>
 </template>
 <script>
+import GLOBAL_MIXINS from "../../mixins/global.mixins";
 
 import DropDown from "@/components/Dropdown.vue";
 import Modal from "@/components/Modal.vue";
@@ -90,6 +91,7 @@ import {
       Modal,
       SidebarPlugin
     },
+    mixins: [GLOBAL_MIXINS],
     data() {
       return {
         searchModalVisible: false,
@@ -103,6 +105,10 @@ import {
       },
       toggleMenu(){
         this.showMenu  = !this.showMenu;
+      },
+      Logout() {
+        this.SET_AUTH_STATE({ loggedIn: false, loggedUser: {} });
+        this.$router.replace(`/login`);
       }
     },
     computed:{
