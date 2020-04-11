@@ -7,7 +7,7 @@ const path = require("path")
 
 exports.getFile = async (req, res, next) => {
    try {
-      res.sendFile(path.join(__dirname, "../uploads", `${req.params.id}`));
+      res.sendFile(path.join(__dirname, "../../uploads", `${req.params.id}`));
    } catch (error) { next(error) }
 }
 
@@ -33,7 +33,7 @@ exports.uploadFile = async (req, res, next) => {
    let fileURL= `http://localhost:3500/api/file/${fileName}`
 
    let fileData = {
-      userId: "5e8c06caded2c410e8da92de",
+      userId: req.body._id,
       fileName: file.name,
       fileUrl: fileURL,
       uploadFileName: fileName,
