@@ -109,6 +109,11 @@ export default {
   methods: {
     selectAudio(file) {
       this.selectedFiles = file;
+
+      setTimeout(() => {
+        let audioElement = document.getElementById("audio-container");
+        if (audioElement) audioElement.play();
+      }, 50)
     },
     deleteFile(fileId) {
       if (fileId) {
