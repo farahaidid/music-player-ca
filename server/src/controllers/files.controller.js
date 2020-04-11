@@ -7,7 +7,7 @@ const path = require("path")
 
 exports.getFile = async (req, res, next) => {
    try {
-      res.sendFile(path.join(__dirname, "../uploads", `${req.params.id}`));
+      res.sendFile(path.join(__dirname, "../../uploads", `${req.params.id}`));
    } catch (error) { next(error) }
 }
 
