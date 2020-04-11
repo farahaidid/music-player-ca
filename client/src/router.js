@@ -55,7 +55,12 @@ const routes = [{
       path: "typography",
       name: "Typography",
       component: Typography
-    }
+    },
+    {
+      path: '/change-password',
+      name: 'changePassword',
+      component: views("ForgotPassword")
+    },
   ]
 },
 {
@@ -67,11 +72,6 @@ const routes = [{
   path: '/login',
   name: "Login",
   component: views("Login")
-},
-{
-  path: '/forgot-password',
-  name: 'ForgotPassword',
-  component: views("ForgotPassword")
 },
 ];
 

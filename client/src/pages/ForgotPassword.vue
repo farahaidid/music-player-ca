@@ -13,7 +13,7 @@
     </base-alert>
 
     <div class="row">
-      <div class="col-md-12 pr-md-1 text-left">
+      <!-- <div class="col-md-12 pr-md-1 text-left">
         <base-input
           label="Email address"
           type="email"
@@ -21,7 +21,7 @@
           placeholder="Enter your email address"
         >
         </base-input>
-      </div>
+      </div> -->
 
       <div class="col-md-12 pr-md-1 text-left">
         <base-input
@@ -48,8 +48,6 @@
       <base-button class="mr-3" type="success" fill @click="onResetPassword"
         >Reset password</base-button
       >
-      <router-link to="/register" class="mr-4">Create account</router-link>
-      <router-link to="/login">Login here</router-link>
     </template>
   </card>
 </template>
@@ -97,12 +95,22 @@ export default {
         else {
           this.success = "Password successfully updated";
         }
-        this.email = "";
         this.newPass = "";
         this.confirmNewPass = "";
       }
     },
   },
+  created() {
+    if (this.LOGGED_IN) { this.FETCH_USER_PROFILE() }
+    else { this.$router.replace("/login") }
+  },
+  mounted() {
+    this.FETCH_USER_PROFILE().then(result => {
+      if (result) {
+        this.email = result.email;
+      }
+    });
+  }
 };
 </script>
 

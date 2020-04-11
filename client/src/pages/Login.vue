@@ -38,7 +38,7 @@
       <!-- <base-button class="mr-3" type="danger" @click="reset(true)"
         >Reset</base-button
       > -->
-      <router-link to="/forgot-password">Forgot password?</router-link>
+      <!-- <router-link to="/forgot-password">Forgot password?</router-link> -->
     </template>
   </card>
 </template>

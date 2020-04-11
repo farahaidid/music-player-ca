@@ -56,6 +56,7 @@
     </div>
     <template slot="footer">
       <base-button type="success" fill @click="updateUser">Save</base-button>
+      <router-link class="ml-3" to="/change-password">Change password?</router-link>
     </template>
   </card>
 </template>
