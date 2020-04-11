@@ -1,19 +1,22 @@
 <template>
-  <card class="forgot-password-container">
-    <template slot="header">
-      <h4 class="title">Reset your password</h4>
-    </template>
-
-    <base-alert v-if="error" type="danger" dismissible>
-      {{ error }}
-    </base-alert>
-
-    <base-alert v-if="success" type="primary" dismissible>
-      {{ success }}
-    </base-alert>
-
+  <div class="content">
     <div class="row">
-      <!-- <div class="col-md-12 pr-md-1 text-left">
+      <div class="col-md-12">
+        <card class="forgot-password-container">
+          <template slot="header">
+            <h4 class="title">Reset your password</h4>
+          </template>
+
+          <base-alert v-if="error" type="danger" dismissible>
+            {{ error }}
+          </base-alert>
+
+          <base-alert v-if="success" type="primary" dismissible>
+            {{ success }}
+          </base-alert>
+
+          <div class="row">
+            <!-- <div class="col-md-12 pr-md-1 text-left">
         <base-input
           label="Email address"
           type="email"
@@ -23,33 +26,40 @@
         </base-input>
       </div> -->
 
-      <div class="col-md-12 pr-md-1 text-left">
-        <base-input
-          label="New Password"
-          type="password"
-          v-model="newPass"
-          placeholder="New Password"
-        >
-        </base-input>
-      </div>
+            <div class="col-md-12 pr-md-1 text-left">
+              <base-input
+                label="New Password"
+                type="password"
+                v-model="newPass"
+                placeholder="New Password"
+              >
+              </base-input>
+            </div>
 
-      <div class="col-md-12 pr-md-1 text-left">
-        <base-input
-          label="Confirm"
-          type="password"
-          v-model="confirmNewPass"
-          placeholder="Confirm Password"
-        >
-        </base-input>
+            <div class="col-md-12 pr-md-1 text-left">
+              <base-input
+                label="Confirm"
+                type="password"
+                v-model="confirmNewPass"
+                placeholder="Confirm Password"
+              >
+              </base-input>
+            </div>
+          </div>
+
+          <template slot="footer">
+            <base-button
+              class="mr-3"
+              type="success"
+              fill
+              @click="onResetPassword"
+              >Reset password</base-button
+            >
+          </template>
+        </card>
       </div>
     </div>
-
-    <template slot="footer">
-      <base-button class="mr-3" type="success" fill @click="onResetPassword"
-        >Reset password</base-button
-      >
-    </template>
-  </card>
+  </div>
 </template>
 
 <script>
@@ -67,14 +77,14 @@ export default {
     newPass: "",
     confirmNewPass: "",
     error: null,
-    success: null,
+    success: null
   }),
   components: {
     Card,
     BaseInput,
     BaseButton,
     BaseRadio,
-    BaseAlert,
+    BaseAlert
   },
   mixins: [GLOBAL_MIXINS],
   methods: {
@@ -89,7 +99,7 @@ export default {
         this.error = null;
         let { error, message } = await this.RESET_PASSWORD({
           email: this.email,
-          password: this.newPass,
+          password: this.newPass
         });
         if (error) this.error = error;
         else {
@@ -98,11 +108,14 @@ export default {
         this.newPass = "";
         this.confirmNewPass = "";
       }
-    },
+    }
   },
   created() {
-    if (this.LOGGED_IN) { this.FETCH_USER_PROFILE() }
-    else { this.$router.replace("/login") }
+    if (this.LOGGED_IN) {
+      this.FETCH_USER_PROFILE();
+    } else {
+      this.$router.replace("/login");
+    }
   },
   mounted() {
     this.FETCH_USER_PROFILE().then(result => {
