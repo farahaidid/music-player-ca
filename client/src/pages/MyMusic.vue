@@ -31,7 +31,9 @@
                 <td>{{getDateFormate(file.uploadedAt)}}</td>
                 <td>{{sizeofFile(file.size)}}</td>
                 <td>
-                  <i class="tim-icons icon-trash-simple" style="cursor: pointer;" @click="deleteFile(file._id)"></i>
+                   <!-- <b-button v-b-modal.modal-1>Launch demo modal</b-button> -->
+                  <i class="tim-icons icon-trash-simple" style="cursor: pointer;" 
+                  v-b-modal.modal-prevent-closing @click="selectedFileId = file._id"></i>
                 </td>
               </tr>
             </tbody>
@@ -39,6 +41,17 @@
         </card>
       </div>
     </div>
+
+    <b-modal
+      id="modal-prevent-closing"
+      ref="modal"
+      title="Delete File"
+      @show="resetModal"
+      @hidden="resetModal"
+      @ok="handleOk"
+    >
+      Are you sure you want to delete this file? You will not get back
+    </b-modal>
 
     <div class="file-upload">
         <card>
@@ -128,6 +141,7 @@ export default {
         title: "Simple Table",
         columns: [...tableColumns],
         data: [...tableData],
+        selectedFileId: "",
         },
         dropzoneOptions: {
             url: '/',
@@ -175,18 +189,19 @@ export default {
     removeAllFiles() {
       this.$refs.dropzone.removeAllFiles();
     },
-    deleteFile(fileId) {
-      if (fileId) {
-        var isOkPress = confirm("Are you sure you want to delete this file? You will not get back");
+    resetModal() {
+        // this.name = ''
+        // this.nameState = null
+    },
+    handleOk(bvModalEvt) {
+      this.DELETE_FILE(this.selectedFileId).then(res => {           
+        this.FETCH_FILES();
 
-        if (isOkPress === true) {
-          this.DELETE_FILE(fileId).then(res => {
-              console.log(res);            
-              this.FETCH_FILES();
-          })
-        }
-      }
-    }
+        this.$nextTick(() => {
+          this.$bvModal.hide('modal-prevent-closing')
+        })
+      });
+    },
   },
   created() {
     if (!this.LOGGED_IN) {

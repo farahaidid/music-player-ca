@@ -34,6 +34,7 @@ import RTLPlugin from "./RTLPlugin";
 import Notify from "@/components/NotificationPlugin";
 import i18n from "./i18n"
 import SideBar from "@/components/SidebarPlugin";
+import { BootstrapVue, ModalPlugin } from 'bootstrap-vue'
 
 // import 'vue-plyr/dist/vue-plyr.css';
 
@@ -58,6 +59,9 @@ Vue.use(GlobalDirectives);
 Vue.use(RTLPlugin);
 Vue.use(SideBar);
 Vue.use(Notify);
+
+Vue.use(ModalPlugin)
+Vue.use(BootstrapVue)
 
 Vue.use(VuePlyr, {
   plyr: {

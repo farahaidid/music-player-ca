@@ -41,7 +41,6 @@
             <th>File Name</th>
             <th>Uploaded At</th>
             <th>Size</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -55,13 +54,6 @@
               <td class="text-left">{{ file.fileName }}</td>
               <td>{{ getDateFormate(file.uploadedAt) }}</td>
               <td>{{ sizeofFile(file.size) }}</td>
-              <td>
-                <i
-                  class="tim-icons icon-trash-simple"
-                  style="cursor: pointer;"
-                  @click="deleteFile(file._id)"
-                ></i>
-              </td>
             </tr>
           </template>
         </tbody>
@@ -114,20 +106,6 @@ export default {
         let audioElement = document.getElementById("audio-container");
         if (audioElement) audioElement.play();
       }, 50)
-    },
-    deleteFile(fileId) {
-      if (fileId) {
-        var isOkPress = confirm(
-          "Are you sure you want to delete this file? You will not get back"
-        );
-
-        if (isOkPress === true) {
-          this.DELETE_FILE(fileId).then((res) => {
-            console.log(res);
-            this.FETCH_FILES();
-          });
-        }
-      }
     },
   },
   created() {
