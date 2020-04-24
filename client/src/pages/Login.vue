@@ -80,7 +80,7 @@ export default {
         if (error) this.error = error;
         else {
           this.reset();
-          this.$router.replace(`/`);
+          this.$router.replace(`/dashboard`);
         }
       }
     },

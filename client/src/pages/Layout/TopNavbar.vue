@@ -109,7 +109,7 @@ import {
       },
       Logout() {
         this.SET_AUTH_STATE({ loggedIn: false, loggedUser: {} });
-        this.$router.replace(`/login`);
+        this.$router.replace(`/`);
       }
     },
     computed:{

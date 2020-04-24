@@ -11,7 +11,15 @@ import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 
 const views = name => () => import(`@/pages/${name}.vue`);
 
-const routes = [{
+import store from "./store"
+
+const routes = [
+  {
+    path: '/',
+    name: 'landing',
+    component: views("Landing"),
+  },
+  {
   path: "/",
   component: DashboardLayout,
   redirect: "dashboard",

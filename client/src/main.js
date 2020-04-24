@@ -36,6 +36,13 @@ import i18n from "./i18n"
 import SideBar from "@/components/SidebarPlugin";
 import { BootstrapVue, ModalPlugin } from 'bootstrap-vue'
 
+import "./assets/landing/font-awesome.min.css";
+
+
+// import "./assets/landing/jquery-1.11.1.min.js"
+// import "./assets/landing/plugins.js"
+// import "./assets/landing/app.js"
+
 // import 'vue-plyr/dist/vue-plyr.css';
 
 
